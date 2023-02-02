@@ -43,7 +43,7 @@ while True:
      
         if 'motorcycle' in d:
             cv2.rectangle(frame,(x1,y1),(x2,y2),(255,0,0),2)
-            cv2.putText(frame,str(d),(x1,1),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,255),1)
+            cv2.putText(frame,str(d),(x1,y1),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,255),1)
         
           
         
