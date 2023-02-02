@@ -22,8 +22,6 @@ cap=cv2.VideoCapture('tvid.mp4')
 
 tracker=Tracker()
 
-area1=[(424,257),(410,276),(779,293),(770,271)]
-area1_c=set()
 while True:
     ret,frame=cap.read()
     if not ret:
@@ -44,27 +42,11 @@ while True:
 #        print(d)
      
         if 'motorcycle' in d:
-
-            list.append([x1,y1,x2,y2])
-    bbox_idx=tracker.update(list)
-    for bbox in bbox_idx:
-        x,y,w,h,id=bbox
-        cx=int(x+w)//2
-        cy=int(y+h)//2
-        cv2.rectangle(frame,(x,y),(w,h),(255,255,0),2)
-        results=cv2.pointPolygonTest(np.array(area1,np.int32),((cx,cy)),False)
-        if results>=0:
-           cv2.rectangle(frame,(x,y),(w,h),(255,0,0),2)
-           cv2.putText(frame,str(id),(x,y),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,255),1)
-           cv2.circle(frame,(cx,cy),3,(0,0,255),-1) 
-           area1_c.add(id) 
-               
-                   
-
-    b=len(area1_c)
-    cv2.putText(frame,str(b),(50,60),cv2.FONT_HERSHEY_PLAIN,5,(0,0,255),3)
-
-    cv2.polylines(frame,[np.array(area1,np.int32)],True,(0,0,255),2)
+            cv2.rectangle(frame,(x1,y1),(x2,y2),(255,0,0),2)
+            cv2.putText(frame,str(d),(x1,1),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,255),1)
+        
+          
+        
     cv2.imshow("ROI",frame)
     if cv2.waitKey(1)&0xFF==27:
         break
